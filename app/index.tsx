@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/base.css';
 import './style/index.css';
+import TodoItem from './templates/TodoItem';
  
 class TodoApp extends React.Component {
     render() {
@@ -11,6 +12,13 @@ class TodoApp extends React.Component {
                       <h1>todos</h1>
                       <input className="new-todo" placeholder="What needs to be done?"></input>
                     </header>
+
+                    <section className="main">
+                      <ul className="todo-list">
+                        <TodoItem />
+                      </ul>
+                    </section>
+
                   </div>
                 )
         }

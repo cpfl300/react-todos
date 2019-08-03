@@ -17,7 +17,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              '@babel/preset-env'
+              '@babel/preset-env', '@babel/preset-typescript'
             ]
           }
         }
@@ -37,4 +37,7 @@ module.exports = {
       filename: './index.html'
     })
   ],
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  }
 }
