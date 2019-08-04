@@ -14,12 +14,7 @@ module.exports = {
         test: /\.(ts|tsx)$/, 
         exclude: /node_modules/, 
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env'
-            ]
-          }
+          loader: 'babel-loader'
         }
       },
       { 
@@ -37,4 +32,10 @@ module.exports = {
       filename: './index.html'
     })
   ],
+  resolve: {
+    alias: {
+      "@template": path.resolve("./app/templates"),
+    },
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  }
 }
