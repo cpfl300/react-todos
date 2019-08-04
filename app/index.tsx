@@ -28,7 +28,7 @@ const TodoApp: React.FunctionComponent = () => {
          className="new-todo"
          placeholder="What needs to be done?"
          ref={refInput}
-         onKeyDown={handleKeyPress}
+         onKeyPress={handleKeyPress}
          defaultValue=''
         />
       </header>
