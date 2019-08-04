@@ -2,7 +2,7 @@ import React from 'react';
 import TodoItem from './TodoItem';
 
 interface PropsType {
-    todos: Object[];
+    todos: object[];
 }
 
 const TodoItemContainer: React.FunctionComponent<PropsType> = props => (

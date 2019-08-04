@@ -5,7 +5,7 @@ import TodoItemContainer from './templates/TodoItemContainer';
 
 const TodoApp: React.FunctionComponent = () => {
   const refInput = useRef<HTMLInputElement>(null);
-  const [todos, setTodos] = useState<Object[]>([]);
+  const [todos, setTodos] = useState<object[]>([]);
   const handleKeyPress = (e: KeyboardEvent): void => {
     if (e.key !== 'Enter' || !refInput.current.value) {
       return;
