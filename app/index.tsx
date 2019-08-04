@@ -1,7 +1,6 @@
 import React, { KeyboardEvent, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import './style/base.css';
-import './style/index.css';
+import 'todomvc-app-css/index.css'
 import TodoItemContainer from './templates/TodoItemContainer';
 
 const TodoApp: React.FunctionComponent = () => {
