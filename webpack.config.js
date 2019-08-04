@@ -38,6 +38,9 @@ module.exports = {
     })
   ],
   resolve: {
+    alias: {
+      "@template": path.resolve("./app/templates"),
+    },
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   }
 }
