@@ -36,6 +36,11 @@ const TodoApp: React.FunctionComponent = () => {
     }))
   }
 
+  const [filterStatus, setFilterStatus] = useState('ALL')
+  const changeFilterStatus = (status: string) => {
+    setFilterStatus(status)
+  }
+
   return (
     <div>
       <header>
@@ -48,7 +53,17 @@ const TodoApp: React.FunctionComponent = () => {
          defaultValue=''
         />
       </header>
-      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo}/>
+      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} filterStatus={filterStatus}/>
+      {todos.length > 0 && <footer className="footer">
+      <span className="todo-count">
+        <strong>{todos.filter((todo) => {return !todo.isComplete}).length}</strong><span> </span><span>item</span><span> left</span></span>
+        <ul className="filters">
+          <li><a className="selected" onClick={(e) => {changeFilterStatus('ALL')}}>All</a></li><span> </span>
+          <li><a onClick={(e) => {changeFilterStatus('ACTIVE')}}>Active</a></li><span> </span>
+          <li><a onClick={(e) => {changeFilterStatus('COMPLETED')}}>Completed</a></li>
+        </ul>
+        {todos.filter((todo) => {return todo.isComplete}).length > 0 && <button className="clear-completed">Clear completed</button>}
+      </footer>}
     </div>
   )
 }
