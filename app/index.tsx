@@ -4,6 +4,7 @@ import 'todomvc-app-css/index.css'
 import TodoItemContainer from './templates/TodoItemContainer';
 
 const TodoApp: React.FunctionComponent = () => {
+  const todoUniqIdx = useRef<number>(0);
   const refInput = useRef<HTMLInputElement>(null);
   const [todos, setTodos] = useState<object[]>([]);
   const handleKeyPress = (e: KeyboardEvent): void => {
@@ -12,11 +13,27 @@ const TodoApp: React.FunctionComponent = () => {
     }
     e.preventDefault();
     const item = {
+      id: ++todoUniqIdx.current,
       msg: refInput.current.value,
       isComplete: false
     };
     setTodos([...todos, item])
     refInput.current.value = '';
+  }
+
+  const toggleComplete = (id: number, isComplete: boolean) => {
+    setTodos(todos.map((todo) => {
+      if (todo.id === id) {
+        todo.isComplete = isComplete
+      }
+      return todo
+    }))
+  }
+
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter((todo) => {
+      return todo.id !== id;
+    }))
   }
 
   return (
@@ -31,7 +48,7 @@ const TodoApp: React.FunctionComponent = () => {
          defaultValue=''
         />
       </header>
-      <TodoItemContainer todos={todos}/>
+      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo}/>
     </div>
   )
 }
