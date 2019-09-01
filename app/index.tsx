@@ -1,6 +1,7 @@
 import React, { KeyboardEvent, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'todomvc-app-css/index.css'
+import './assets/style/common.css'
 import TodoItemContainer from './templates/TodoItemContainer';
 
 const TodoApp: React.FunctionComponent = () => {
@@ -15,7 +16,8 @@ const TodoApp: React.FunctionComponent = () => {
     const item = {
       id: ++todoUniqIdx.current,
       msg: refInput.current.value,
-      isComplete: false
+      isComplete: false,
+      starred: false,
     };
     setTodos([...todos, item])
     refInput.current.value = '';
@@ -36,6 +38,15 @@ const TodoApp: React.FunctionComponent = () => {
     }))
   }
 
+  const handleClickStarButton = (id: number) => {
+    setTodos(todos.map((todo) => {
+      if (todo.id === id) {
+        todo.starred = !todo.starred
+      }
+      return todo
+    }))
+  }
+
   const [filterStatus, setFilterStatus] = useState('ALL')
   const changeFilterStatus = (status: string) => {
     setFilterStatus(status)
@@ -53,7 +64,7 @@ const TodoApp: React.FunctionComponent = () => {
          defaultValue=''
         />
       </header>
-      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} filterStatus={filterStatus}/>
+      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} filterStatus={filterStatus} handleClickStarButton={handleClickStarButton}/>
       {todos.length > 0 && <footer className="footer">
       <span className="todo-count">
         <strong>{todos.filter((todo) => {return !todo.isComplete}).length}</strong><span> </span><span>item</span><span> left</span></span>
