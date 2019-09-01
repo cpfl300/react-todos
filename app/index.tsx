@@ -62,7 +62,6 @@ const TodoApp: React.FunctionComponent = () => {
           <li><a onClick={(e) => {changeFilterStatus('ACTIVE')}}>Active</a></li><span> </span>
           <li><a onClick={(e) => {changeFilterStatus('COMPLETED')}}>Completed</a></li>
         </ul>
-        {todos.filter((todo) => {return todo.isComplete}).length > 0 && <button className="clear-completed">Clear completed</button>}
       </footer>}
     </div>
   )
