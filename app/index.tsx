@@ -58,9 +58,9 @@ const TodoApp: React.FunctionComponent = () => {
       <span className="todo-count">
         <strong>{todos.filter((todo) => {return !todo.isComplete}).length}</strong><span> </span><span>item</span><span> left</span></span>
         <ul className="filters">
-          <li><a className="selected" onClick={(e) => {changeFilterStatus('ALL')}}>All</a></li><span> </span>
-          <li><a onClick={(e) => {changeFilterStatus('ACTIVE')}}>Active</a></li><span> </span>
-          <li><a onClick={(e) => {changeFilterStatus('COMPLETED')}}>Completed</a></li>
+          <li><a className={filterStatus === 'ALL' ? "selected" : undefined} onClick={(e) => {changeFilterStatus('ALL')}}>All</a></li><span> </span>
+          <li><a className={filterStatus === 'ACTIVE' ? "selected" : undefined} onClick={(e) => {changeFilterStatus('ACTIVE')}}>Active</a></li><span> </span>
+          <li><a className={filterStatus === 'COMPLETED' ? "selected" : undefined} onClick={(e) => {changeFilterStatus('COMPLETED')}}>Completed</a></li>
         </ul>
       </footer>}
     </div>
