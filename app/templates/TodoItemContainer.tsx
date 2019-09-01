@@ -24,7 +24,8 @@ const TodoItemContainer: React.FunctionComponent<PropsType> = props =>
         return (
             <section className="main">
                 <ul className="todo-list">
-                    {filteredTodos.map(todo => {
+                    {filteredTodos.sort((a, b) => { return a.id < b.id ? 1: -1 }).sort((a, b) => { return b.starred - a.starred })
+                    .map(todo => {
                         return (
                             <TodoItem
                                 key={todo.id}
