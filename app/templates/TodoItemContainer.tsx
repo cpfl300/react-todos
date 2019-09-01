@@ -6,6 +6,8 @@ interface PropsType {
     toggleComplete: Function,
     deleteTodo: Function,
     filterStatus: string,
+    handleClickStarButton: Function,
+    updateTodoTitle: Function,
 }
 
 const TodoItemContainer: React.FunctionComponent<PropsType> = props => 
@@ -23,13 +25,16 @@ const TodoItemContainer: React.FunctionComponent<PropsType> = props =>
         return (
             <section className="main">
                 <ul className="todo-list">
-                    {filteredTodos.map(todo => {
+                    {filteredTodos.sort((a, b) => { return a.id < b.id ? 1: -1 }).sort((a, b) => { return b.starred - a.starred })
+                    .map(todo => {
                         return (
                             <TodoItem
                                 key={todo.id}
                                 todo={todo}
                                 toggleComplete={props.toggleComplete}
+                                updateTodoTitle={props.updateTodoTitle}
                                 deleteTodo={props.deleteTodo}
+                                handleClickStarButton={props.handleClickStarButton}
                             />
                         )
                     })

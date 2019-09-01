@@ -1,6 +1,7 @@
 import React, { KeyboardEvent, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'todomvc-app-css/index.css'
+import './assets/style/common.css'
 import TodoItemContainer from './templates/TodoItemContainer';
 
 const TodoApp: React.FunctionComponent = () => {
@@ -14,8 +15,10 @@ const TodoApp: React.FunctionComponent = () => {
     e.preventDefault();
     const item = {
       id: ++todoUniqIdx.current,
-      msg: refInput.current.value,
-      isComplete: false
+      title: refInput.current.value,
+      msg: '',
+      isComplete: false,
+      starred: false,
     };
     setTodos([...todos, item])
     refInput.current.value = '';
@@ -30,9 +33,27 @@ const TodoApp: React.FunctionComponent = () => {
     }))
   }
 
+  const updateTodoTitle = (id: number, newTitle: string) => {
+    setTodos(todos.map((todo) => {
+      if (todo.id === id) {
+        todo.title = newTitle
+      }
+      return todo
+    }))
+  }
+
   const deleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => {
       return todo.id !== id;
+    }))
+  }
+
+  const handleClickStarButton = (id: number) => {
+    setTodos(todos.map((todo) => {
+      if (todo.id === id) {
+        todo.starred = !todo.starred
+      }
+      return todo
     }))
   }
 
@@ -53,14 +74,14 @@ const TodoApp: React.FunctionComponent = () => {
          defaultValue=''
         />
       </header>
-      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} filterStatus={filterStatus}/>
+      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} updateTodoTitle={updateTodoTitle} deleteTodo={deleteTodo} filterStatus={filterStatus} handleClickStarButton={handleClickStarButton}/>
       {todos.length > 0 && <footer className="footer">
       <span className="todo-count">
         <strong>{todos.filter((todo) => {return !todo.isComplete}).length}</strong><span> </span><span>item</span><span> left</span></span>
         <ul className="filters">
-          <li><a className="selected" onClick={(e) => {changeFilterStatus('ALL')}}>All</a></li><span> </span>
-          <li><a onClick={(e) => {changeFilterStatus('ACTIVE')}}>Active</a></li><span> </span>
-          <li><a onClick={(e) => {changeFilterStatus('COMPLETED')}}>Completed</a></li>
+          <li><a className={filterStatus === 'ALL' ? "selected" : undefined} onClick={(e) => {changeFilterStatus('ALL')}}>All</a></li><span> </span>
+          <li><a className={filterStatus === 'ACTIVE' ? "selected" : undefined} onClick={(e) => {changeFilterStatus('ACTIVE')}}>Active</a></li><span> </span>
+          <li><a className={filterStatus === 'COMPLETED' ? "selected" : undefined} onClick={(e) => {changeFilterStatus('COMPLETED')}}>Completed</a></li>
         </ul>
       </footer>}
     </div>
