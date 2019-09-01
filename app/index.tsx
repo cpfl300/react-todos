@@ -15,7 +15,8 @@ const TodoApp: React.FunctionComponent = () => {
     e.preventDefault();
     const item = {
       id: ++todoUniqIdx.current,
-      msg: refInput.current.value,
+      title: refInput.current.value,
+      msg: '',
       isComplete: false,
       starred: false,
     };
@@ -27,6 +28,15 @@ const TodoApp: React.FunctionComponent = () => {
     setTodos(todos.map((todo) => {
       if (todo.id === id) {
         todo.isComplete = isComplete
+      }
+      return todo
+    }))
+  }
+
+  const updateTodoTitle = (id: number, newTitle: string) => {
+    setTodos(todos.map((todo) => {
+      if (todo.id === id) {
+        todo.title = newTitle
       }
       return todo
     }))
@@ -64,7 +74,7 @@ const TodoApp: React.FunctionComponent = () => {
          defaultValue=''
         />
       </header>
-      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} filterStatus={filterStatus} handleClickStarButton={handleClickStarButton}/>
+      <TodoItemContainer todos={todos} toggleComplete={toggleComplete} updateTodoTitle={updateTodoTitle} deleteTodo={deleteTodo} filterStatus={filterStatus} handleClickStarButton={handleClickStarButton}/>
       {todos.length > 0 && <footer className="footer">
       <span className="todo-count">
         <strong>{todos.filter((todo) => {return !todo.isComplete}).length}</strong><span> </span><span>item</span><span> left</span></span>

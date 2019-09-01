@@ -7,6 +7,7 @@ interface PropsType {
     deleteTodo: Function,
     filterStatus: string,
     handleClickStarButton: Function,
+    updateTodoTitle: Function,
 }
 
 const TodoItemContainer: React.FunctionComponent<PropsType> = props => 
@@ -31,6 +32,7 @@ const TodoItemContainer: React.FunctionComponent<PropsType> = props =>
                                 key={todo.id}
                                 todo={todo}
                                 toggleComplete={props.toggleComplete}
+                                updateTodoTitle={props.updateTodoTitle}
                                 deleteTodo={props.deleteTodo}
                                 handleClickStarButton={props.handleClickStarButton}
                             />
